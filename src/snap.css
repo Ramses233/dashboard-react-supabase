@@ -1,0 +1,102 @@
+/* Tema "Picaboo": solo lo que Bootstrap no trae (amarillo, cámara a pantalla completa, visor). */
+:root {
+  --snap-amarillo: #fffc00;
+  --alto-nav: 58px;
+}
+
+body { background: #f6f6f6; }
+
+.pantalla-carga { display: grid; place-items: center; height: 100vh; background: var(--snap-amarillo); }
+.portada { min-height: 100vh; background: var(--snap-amarillo); }
+
+/* Botón principal: amarillo con texto negro */
+.btn-snap {
+  --bs-btn-color: #000;
+  --bs-btn-bg: var(--snap-amarillo);
+  --bs-btn-border-color: #000;
+  --bs-btn-hover-color: #000;
+  --bs-btn-hover-bg: #ece900;
+  --bs-btn-hover-border-color: #000;
+  --bs-btn-active-color: #000;
+  --bs-btn-active-bg: #d9d600;
+  --bs-btn-active-border-color: #000;
+  --bs-btn-disabled-color: #000;
+  --bs-btn-disabled-bg: var(--snap-amarillo);
+  --bs-btn-disabled-border-color: #000;
+  font-weight: 600;
+}
+
+.contenido { max-width: 760px; padding-bottom: calc(var(--alto-nav) + 24px + env(safe-area-inset-bottom)); }
+.miniatura { aspect-ratio: 3 / 4; object-fit: cover; }
+
+/* ---------- Barra inferior ---------- */
+.nav-inferior {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 1030;
+  display: flex; justify-content: space-around; align-items: center;
+  height: calc(var(--alto-nav) + env(safe-area-inset-bottom));
+  padding-bottom: env(safe-area-inset-bottom);
+  background: #fff; border-top: 1px solid #ddd;
+}
+.nav-inf-item {
+  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px;
+  font-size: 11px; color: #777; text-decoration: none;
+}
+.nav-inf-item.activo { color: #000; font-weight: 700; }
+.nav-inf-item.activo svg { stroke: #000; fill: var(--snap-amarillo); }
+.insignia-nuevos {
+  position: absolute; top: -6px; right: -10px; min-width: 18px; height: 18px; padding: 0 5px;
+  border-radius: 9px; background: #f23c57; color: #fff; font-size: 11px; line-height: 18px; text-align: center;
+}
+
+/* ---------- Cámara ---------- */
+.camara {
+  position: fixed; top: 0; left: 0; right: 0; bottom: calc(var(--alto-nav) + env(safe-area-inset-bottom));
+  background: #000; overflow: hidden;
+}
+.camara video, .camara .vista-foto { width: 100%; height: 100%; object-fit: cover; display: block; }
+.camara video.espejo { transform: scaleX(-1); }
+.sin-camara { position: absolute; inset: 0; display: grid; place-content: center; }
+
+.camara-superior {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 2;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: calc(12px + env(safe-area-inset-top)) 16px 12px;
+}
+.marca { color: #fff; font-weight: 800; letter-spacing: .5px; text-shadow: 0 1px 4px rgba(0,0,0,.6); }
+.camara-inferior {
+  position: absolute; left: 0; right: 0; bottom: 18px; z-index: 2;
+  display: flex; justify-content: space-around; align-items: center;
+}
+.btn-icono {
+  width: 44px; height: 44px; border: 0; border-radius: 50%;
+  display: grid; place-items: center; color: #fff; background: rgba(0,0,0,.35);
+}
+.obturador {
+  width: 78px; height: 78px; border-radius: 50%;
+  border: 5px solid #fff; background: transparent;
+}
+.obturador:active { background: rgba(255,255,255,.5); }
+
+.panel-envio {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
+  border-radius: 18px 18px 0 0; max-width: 520px; margin: 0 auto;
+}
+.lista-contactos { max-height: 160px; overflow-y: auto; }
+.aviso-flotante { position: absolute; top: 70px; left: 16px; right: 16px; z-index: 5; text-align: center; }
+
+/* ---------- Bandeja y visor ---------- */
+.cuadro-snap { width: 22px; height: 22px; border-radius: 5px; flex: none; }
+.cuadro-snap.nuevo { background: #f23c57; }
+.cuadro-snap.abierto { border: 2px solid #bbb; }
+
+.visor {
+  position: fixed; inset: 0; z-index: 2000; background: #000;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.visor img { width: 100%; height: 100%; object-fit: contain; }
+.visor-progreso { position: absolute; top: env(safe-area-inset-top); left: 0; right: 0; height: 5px; border-radius: 0; background: rgba(255,255,255,.25); }
+.visor-info {
+  position: absolute; top: calc(14px + env(safe-area-inset-top)); left: 12px; right: 12px;
+  display: flex; justify-content: space-between; align-items: center;
+  color: #fff; font-weight: 600; text-shadow: 0 1px 4px rgba(0,0,0,.7);
+}
